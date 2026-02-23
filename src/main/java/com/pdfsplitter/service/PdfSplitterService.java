@@ -46,6 +46,38 @@ public class PdfSplitterService {
         }
     }
 
+    public List<SplitResult> splitPdf(MultipartFile file, List<Integer> pageSplitNumber) throws IOException {
+        String baseName = getBaseName(file.getOriginalFilename());
+
+        byte[] pdfBytes = file.getBytes();
+        try (PDDocument document = Loader.loadPDF(pdfBytes)) {
+            List<SplitResult> result = new ArrayList<>();
+            for (int i = 0; i+1 < pageSplitNumber.size(); i++) {
+                int pageStart = pageSplitNumber.get(i);
+                int pageEnd = pageSplitNumber.get(i + 1);
+                Splitter splitter = new Splitter();
+                splitter.setStartPage(pageStart);
+                splitter.setEndPage(pageSplitNumber.get(i + 1));
+                splitter.setSplitAtPage(pageEnd);
+
+                List<PDDocument> splitDocuments = splitter.split(document);
+
+                for (PDDocument splitDoc : splitDocuments) {
+                    try {
+                        String filename = baseName + "(" + pageStart + "-" + pageEnd + ").pdf";
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        splitDoc.save(outputStream);
+                        result.add(new SplitResult(filename, outputStream.toByteArray()));
+                    } finally {
+                        splitDoc.close();
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+
     private String getBaseName(String filename) {
         if (filename == null || filename.isBlank()) {
             return "document";
