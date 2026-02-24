@@ -1,5 +1,7 @@
 package com.pdfsplitter.service;
 
+import com.pdfsplitter.controller.PdfSplitItem;
+import com.pdfsplitter.controller.PdfSplitRequest;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.multipdf.Splitter;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -30,15 +32,13 @@ public class PdfSplitterService {
 
             int pageStart = 1;
             for (PDDocument splitDoc : splitDocuments) {
-                try {
+                try (splitDoc) {
                     int pageEnd = pageStart + splitDoc.getNumberOfPages() - 1;
                     String filename = baseName + "(" + pageStart + "-" + pageEnd + ").pdf";
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     splitDoc.save(outputStream);
                     result.add(new SplitResult(filename, outputStream.toByteArray()));
                     pageStart = pageEnd + 1;
-                } finally {
-                    splitDoc.close();
                 }
             }
 
@@ -52,7 +52,7 @@ public class PdfSplitterService {
         byte[] pdfBytes = file.getBytes();
         try (PDDocument document = Loader.loadPDF(pdfBytes)) {
             List<SplitResult> result = new ArrayList<>();
-            for (int i = 0; i+1 < pageSplitNumber.size(); i++) {
+            for (int i = 0; i + 1 < pageSplitNumber.size(); i++) {
                 int pageStart = pageSplitNumber.get(i);
                 int pageEnd = pageSplitNumber.get(i + 1);
                 Splitter splitter = new Splitter();
@@ -63,13 +63,42 @@ public class PdfSplitterService {
                 List<PDDocument> splitDocuments = splitter.split(document);
 
                 for (PDDocument splitDoc : splitDocuments) {
-                    try {
+                    try (splitDoc) {
                         String filename = baseName + "(" + pageStart + "-" + pageEnd + ").pdf";
                         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                         splitDoc.save(outputStream);
                         result.add(new SplitResult(filename, outputStream.toByteArray()));
-                    } finally {
-                        splitDoc.close();
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+
+    public List<SplitResult> splitPdfParts(PdfSplitRequest request) throws IOException {
+        String baseName = getBaseName(request.file().getOriginalFilename());
+        List<PdfSplitItem> parts = request.parts();
+
+        byte[] pdfBytes = request.file().getBytes();
+        try (PDDocument document = Loader.loadPDF(pdfBytes)) {
+            List<SplitResult> result = new ArrayList<>();
+            for (PdfSplitItem part : parts) {
+                int pageStart = part.startPage();
+                int pageEnd = part.endPage();
+                Splitter splitter = new Splitter();
+                splitter.setStartPage(pageStart);
+                splitter.setEndPage(pageEnd);
+                splitter.setSplitAtPage(pageEnd);
+
+                List<PDDocument> splitDocuments = splitter.split(document);
+
+                for (PDDocument splitDoc : splitDocuments) {
+                    try (splitDoc) {
+                        String filename = baseName + "(" + part.title() + ").pdf";
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        splitDoc.save(outputStream);
+                        result.add(new SplitResult(filename, outputStream.toByteArray()));
                     }
                 }
             }

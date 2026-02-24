@@ -95,7 +95,7 @@ public class PdfSplitterController {
                 ? originalFilename.replaceAll("(?i)\\.pdf$", "")
                 : originalFilename;
 
-        List<SplitResult> splitResults = pdfSplitterService.splitPdf(file,pageSplitNumber);
+        List<SplitResult> splitResults = pdfSplitterService.splitPdf(file, pageSplitNumber);
 
         try (ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
              ZipOutputStream zos = new ZipOutputStream(zipStream)) {
@@ -113,6 +113,53 @@ public class PdfSplitterController {
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + baseName + "-split.zip\"")
                     .contentType(MediaType.parseMediaType("application/zip"))
+                    .body(zipBytes);
+        }
+    }
+
+    @Operation(
+            summary = "Split PDF by Page Ranges",
+            description = "Upload a PDF and a JSON list of page ranges with titles. Send 'file' as the PDF and 'parts' as application/json. Returns a ZIP file containing the split sections."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully generated ZIP containing split PDFs"),
+            @ApiResponse(responseCode = "400", description = "Invalid file or malformed split ranges")
+    })
+    @PostMapping(value = "/split-manual-title", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<byte[]> splitPdfWithManualTitle(
+            @RequestPart("file") @Parameter(description = "PDF file to split", content = @Content(mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE)) MultipartFile file,
+            @RequestPart("parts") @Parameter(description = "JSON array of {title, startPage, endPage}", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)) List<PdfSplitItem> parts) throws IOException {
+
+        if (file.isEmpty() || file.getContentType() == null || !file.getContentType().equalsIgnoreCase("application/pdf")) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        PdfSplitRequest request = new PdfSplitRequest(file, parts);
+        String originalFilename = request.file().getOriginalFilename();
+        String baseName = (originalFilename != null && originalFilename.toLowerCase().endsWith(".pdf"))
+                ? originalFilename.substring(0, originalFilename.length() - 4)
+                : "document";
+
+        List<SplitResult> splitResults = pdfSplitterService.splitPdfParts(request);
+
+        try (ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
+             ZipOutputStream zos = new ZipOutputStream(zipStream)) {
+
+            for (SplitResult result : splitResults) {
+                // result.filename() should ideally be "{originalName}({title}).pdf"
+                // as per your description requirements
+                ZipEntry entry = new ZipEntry(result.filename());
+                zos.putNextEntry(entry);
+                zos.write(result.content());
+                zos.closeEntry();
+            }
+
+            zos.finish();
+            byte[] zipBytes = zipStream.toByteArray();
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + baseName + "-split.zip\"")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/zip")
                     .body(zipBytes);
         }
     }
