@@ -23,10 +23,13 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
-
+parts.json
+*.json
+**/*.json
 ### VS Code ###
 .vscode/
-
+*.pdf
+**/*.pdf
 ### Mac OS ###
 .DS_Store### Java template
 # Compiled class file
