@@ -15,6 +15,48 @@ mvn spring-boot:run
 
 The server starts on `http://localhost:8080`.
 
+## Run with Docker Compose
+
+This project includes a Docker setup that:
+- Builds and starts the API service
+- Runs a sample request using values from `variables.json`
+
+Files involved:
+- `Dockerfile` — builds the Spring Boot app image
+- `docker-compose.yml` — starts the API and a helper container that calls the sample request
+- `variables.json` — provides inputs for the sample request
+
+`variables.json` schema (relative paths recommended):
+
+```json
+{
+  "book_full_path": "relative/path/to/book.pdf",
+  "output_name": "output.zip",
+  "parts": "relative/path/to/parts.json"
+}
+```
+
+This repo already contains example values that match the included `book/postgresql-18-A4.pdf` and `parts.json`.
+
+Notes:
+- Docker Compose mounts the project directory using a relative path (`.:/workspace`), so relative paths in `variables.json` are resolved from the project root inside the containers (`/workspace`).
+
+Start everything:
+
+```bash
+docker compose up --build
+```
+
+What happens:
+- Service `app` starts at `http://localhost:8080`
+- Service `run-sample` waits for the API to be ready, then calls:
+  - `POST /api/pdf/split-manual-title` with:
+    - `file` = `variables.json.book_full_path`
+    - `parts` = JSON loaded from `variables.json.parts`
+  - Saves the result ZIP as `variables.json.output_name` in the project root
+
+After it finishes, you should see a file like `postgresql-18.04.zip` in the project directory.
+
 ## API Usage
 
 ### 1. Split PDF (Every 50 Pages)

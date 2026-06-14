@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: pdf-splitter-app
+    ports:
+      - "8080:8080"
+    # Mount the project using a relative path to the repository root
+    volumes:
+      - .:/workspace:rw
+    working_dir: /workspace
+
+  run-sample:
+    image: alpine:3.19
+    container_name: pdf-splitter-sample
+    depends_on:
+      - app
+    volumes:
+      - .:/workspace:rw
+    working_dir: /workspace
+    entrypoint: ["/bin/sh","-c"]
+    command: >
+      set -ex;
+      apk add --no-cache curl jq >/dev/null;
+      echo "Waiting for API...";
+      until curl -sf http://app:8080/v3/api-docs >/dev/null; do sleep 1; done;
+      BOOK=$(jq -r .book_full_path variables.json);
+      OUT=$(jq -r .output_name variables.json);
+      PARTS=$(jq -r .parts variables.json);
+      echo "Using: BOOK=$$BOOK OUT=$$OUT PARTS=$$PARTS";
+      curl -s -f -o "$$OUT" \
+        -F "file=@$${BOOK};type=application/pdf" \
+        -F "parts=@$${PARTS};type=application/json" \
+        http://app:8080/api/pdf/split-manual-title;
+      echo "Saved ZIP => $OUT";
+      # keep container alive briefly so logs are viewable
+      sleep 5

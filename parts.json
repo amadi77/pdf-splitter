@@ -1,0 +1,87 @@
+[
+  {
+    "title": "1. Getting Started - 1.2. Architectural Fundamentals",
+    "startPage": 43,
+    "endPage": 43
+  },
+  {
+    "title": "4. SQL Syntax",
+    "startPage": 73,
+    "endPage": 98
+  },
+  {
+    "title": "5. Data Definition",
+    "startPage": 99,
+    "endPage": 152
+  },
+  {
+    "title": "8. Data Types - 8.14. JSON Types & 8.15. Arrays & 8.16. Composite Types & 8.17. Range Types & 8.18. Domain Types",
+    "startPage": 224,
+    "endPage": 256
+  },
+  {
+    "title": "11. Indexes",
+    "startPage": 494,
+    "endPage": 509
+  },
+  {
+    "title": "12. Full Text Search",
+    "startPage": 510,
+    "endPage": 551
+  },
+  {
+    "title": "13. Concurrency Control",
+    "startPage": 552,
+    "endPage": 567
+  },
+  {
+    "title": "14. Performance Tips",
+    "startPage": 568,
+    "endPage": 594
+  },
+  {
+    "title": "15. Parallel Query",
+    "startPage": 595,
+    "endPage": 600
+  },
+  {
+    "title": "19. Server Configuration - 19.1. Setting Parameters ",
+    "startPage": 670,
+    "endPage": 680
+  },
+  {
+    "title": "19. Server Configuration - 19.4. Resource Consumption & 19.5. Write Ahead Log & 19.6. Replication & 19.7. Query Planning",
+    "startPage": 691,
+    "endPage": 716
+  },
+  {
+    "title": "19. Server Configuration - 19.10. Vacuuming & 19.11. Client Connection Defaults & 19.12. Lock Management",
+    "startPage": 733,
+    "endPage": 749
+  },
+  {
+    "title": "25. Backup and Restore - 25.3. Continuous Archiving and Point-in-Time Recovery (PITR)",
+    "startPage": 842,
+    "endPage": 853
+  },
+  {
+    "title": "26. High Availability, Load Balancing, and Replication",
+    "startPage": 854,
+    "endPage": 874
+  },
+  {
+    "title": "28. Reliability and the Write-Ahead Log",
+    "startPage": 938,
+    "endPage": 946
+  },
+  {
+    "title": "29. Logical Replication",
+    "startPage": 947,
+    "endPage": 981
+  },
+  {
+    "title": "30. Just-in-Time Compilation (JIT)",
+    "startPage": 982,
+    "endPage": 985
+  }
+]
