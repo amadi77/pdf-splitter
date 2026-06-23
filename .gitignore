@@ -23,8 +23,6 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
-parts.json
-*.json
 **/*.json
 ### VS Code ###
 .vscode/

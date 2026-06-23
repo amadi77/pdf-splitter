@@ -1,87 +1,157 @@
 [
   {
-    "title": "1. Getting Started - 1.2. Architectural Fundamentals",
-    "startPage": 43,
-    "endPage": 43
+    "title": "if you want to gather honey, don't kick over the beehive",
+    "startPage": 25,
+    "endPage": 37
   },
   {
-    "title": "4. SQL Syntax",
-    "startPage": 73,
-    "endPage": 98
+    "title": "The big secret of dealing with people",
+    "startPage": 38,
+    "endPage": 50
   },
   {
-    "title": "5. Data Definition",
-    "startPage": 99,
-    "endPage": 152
+    "title": "he who can do this has the whole world with him. hw who cannot walks a lonely way",
+    "startPage": 51,
+    "endPage": 66
   },
   {
-    "title": "8. Data Types - 8.14. JSON Types & 8.15. Arrays & 8.16. Composite Types & 8.17. Range Types & 8.18. Domain Types",
-    "startPage": 224,
-    "endPage": 256
+    "title": "Do this and you'll be welcome anywhere",
+    "startPage": 68,
+    "endPage": 79
   },
   {
-    "title": "11. Indexes",
-    "startPage": 494,
-    "endPage": 509
+    "title": "a simple way to make a good first impression",
+    "startPage": 80,
+    "endPage": 87
   },
   {
-    "title": "12. Full Text Search",
-    "startPage": 510,
-    "endPage": 551
+    "title": "if you don't do this, you are headed for trouble",
+    "startPage": 88,
+    "endPage": 95
   },
   {
-    "title": "13. Concurrency Control",
-    "startPage": 552,
-    "endPage": 567
+    "title": "an easy way to become a good conversationalist",
+    "startPage": 96,
+    "endPage": 104
   },
   {
-    "title": "14. Performance Tips",
-    "startPage": 568,
-    "endPage": 594
+    "title": "how to interest people",
+    "startPage": 105,
+    "endPage": 108
   },
   {
-    "title": "15. Parallel Query",
-    "startPage": 595,
-    "endPage": 600
+    "title": "how to make people like you instantly",
+    "startPage": 109,
+    "endPage": 119
   },
   {
-    "title": "19. Server Configuration - 19.1. Setting Parameters ",
-    "startPage": 670,
-    "endPage": 680
+    "title": "you can't win and argument",
+    "startPage": 121,
+    "endPage": 127
   },
   {
-    "title": "19. Server Configuration - 19.4. Resource Consumption & 19.5. Write Ahead Log & 19.6. Replication & 19.7. Query Planning",
-    "startPage": 691,
-    "endPage": 716
+    "title": "a sure way of making enemies- and how to avoid it",
+    "startPage": 129,
+    "endPage": 139
   },
   {
-    "title": "19. Server Configuration - 19.10. Vacuuming & 19.11. Client Connection Defaults & 19.12. Lock Management",
-    "startPage": 733,
-    "endPage": 749
+    "title": "if you are wrong, admit it",
+    "startPage": 140,
+    "endPage": 146
   },
   {
-    "title": "25. Backup and Restore - 25.3. Continuous Archiving and Point-in-Time Recovery (PITR)",
-    "startPage": 842,
-    "endPage": 853
+    "title": "a drop of honey",
+    "startPage": 147,
+    "endPage": 154
   },
   {
-    "title": "26. High Availability, Load Balancing, and Replication",
-    "startPage": 854,
-    "endPage": 874
+    "title": "the secret of socrates",
+    "startPage": 155,
+    "endPage": 160
   },
   {
-    "title": "28. Reliability and the Write-Ahead Log",
-    "startPage": 938,
-    "endPage": 946
+    "title": "the safety valve in handling complaints",
+    "startPage": 161,
+    "endPage": 165
   },
   {
-    "title": "29. Logical Replication",
-    "startPage": 947,
-    "endPage": 981
+    "title": "how to get cooperation",
+    "startPage": 166,
+    "endPage": 170
   },
   {
-    "title": "30. Just-in-Time Compilation (JIT)",
-    "startPage": 982,
-    "endPage": 985
+    "title": "a formula that will work wonders for you",
+    "startPage": 171,
+    "endPage": 175
+  },
+  {
+    "title": "what everybody wants",
+    "startPage": 177,
+    "endPage": 183
+  },
+  {
+    "title": "an appeal that everybody likes",
+    "startPage": 184,
+    "endPage": 188
+  },
+  {
+    "title": "the movies do it. Tv does it, why don’t you do it?",
+    "startPage": 189,
+    "endPage": 192
+  },
+  {
+    "title": "when nothing else works, try this",
+    "startPage": 193,
+    "endPage": 196
+  },
+  {
+    "title": "if you must find fault, this is the way to begin",
+    "startPage": 198,
+    "endPage": 203
+  },
+  {
+    "title": "how to criticize-and not be hated for it",
+    "startPage": 204,
+    "endPage": 207
+  },
+  {
+    "title": "talk about your own mistakes first",
+    "startPage": 208,
+    "endPage": 212
+  },
+  {
+    "title": "no one likes to take orders",
+    "startPage": 213,
+    "endPage": 215
+  },
+  {
+    "title": "let the other person save face",
+    "startPage": 216,
+    "endPage": 219
+  },
+  {
+    "title": "how to spur people on success",
+    "startPage": 220,
+    "endPage": 224
+  },
+  {
+    "title": "give a dog a good name",
+    "startPage": 226,
+    "endPage": 229
+  },
+  {
+    "title": "make the fault seem easy to correct",
+    "startPage": 230,
+    "endPage": 233
+  },
+  {
+    "title": "make peopke glad to do what you want",
+    "startPage": 234,
+    "endPage": 239
+  },
+  {
+    "title": "a shirtcut to distinction",
+    "startPage": 240,
+    "endPage": 250
   }
 ]
